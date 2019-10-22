@@ -1,8 +1,8 @@
-package com.cvc.service.strategy;
+package com.cvc.domain.strategy;
 
 import java.util.List;
 
-import com.cvc.model.Hotel;
+import com.cvc.domain.model.Cotacao;
 
 /**
  * Created by Cid Soares on 20/10/2019.
@@ -12,5 +12,5 @@ import com.cvc.model.Hotel;
  * Strategy lets the algorithm vary independently from clients that use it.
  */
 public interface IHotelStrategy {
-	List<Hotel> Search(int code);
+	List<Cotacao> Search(int code, int amountDaily);
 }

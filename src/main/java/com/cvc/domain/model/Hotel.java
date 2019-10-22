@@ -1,4 +1,4 @@
-package com.cvc.model;
+package com.cvc.domain.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.cvc.service.strategy;
+package com.cvc.domain.strategy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.cvc.model.Hotel;
+import com.cvc.domain.model.Hotel;
 
 
 public abstract class AbstractHotel {
