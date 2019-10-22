@@ -1,1 +1,1 @@
-package com.cvc.enums;
+package com.cvc.domain.enums;

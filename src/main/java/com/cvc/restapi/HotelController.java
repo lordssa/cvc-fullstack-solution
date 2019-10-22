@@ -1,8 +1,11 @@
 package com.cvc.restapi;
 
+import java.util.Date;
+
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,9 +44,13 @@ public class HotelController {
 	
 	@GetMapping("/porCidade")
 	@ApiOperation(value = "Retorna cotações de hoteis por cidade")
-	public ResponseEntity RetornaCotacaoPorCidade(@RequestParam(value="codCidade") int codCidade) {
+	public ResponseEntity RetornaCotacaoPorCidade(@RequestParam(value="cityCode") int cityCode,
+												  @RequestParam(value="checkin") @DateTimeFormat(pattern = "dd/MM/yyyy") Date checkin,
+												  @RequestParam(value="checkout") @DateTimeFormat(pattern = "dd/MM/yyyy") Date checkout,
+												  @RequestParam(value="adults") int adults,
+												  @RequestParam(value="children") int children) {
 		try {
-			return new ResponseEntity(_hotelService.HotelsByCity(codCidade), HttpStatus.OK);
+			return new ResponseEntity(_hotelService.HotelsByCity(cityCode, checkin, checkout, adults, children), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}

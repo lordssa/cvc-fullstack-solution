@@ -18,12 +18,19 @@ public class Price {
 	}
 	
 	public double getTotalPrice(int amountDaily) {
-		return getAdult()*amountDaily+getChild()*amountDaily+getComissao();
+		return getValueTripAdult(amountDaily)+getValueTripChild(amountDaily)+getComissao(amountDaily);
 	}
 	
-	private double getComissao() {
-		return getAdult()/0.7d+getChild()/0.7d;
+	private double getComissao(int amountDaily) {
+		return getValueTripAdult(amountDaily)/0.7+getValueTripChild(amountDaily)/0.7;
 	}
 	
+	private double getValueTripAdult(int amountDaily) {
+		return getAdult()*amountDaily;
+	}
+	
+	private double getValueTripChild(int amountDaily) {
+		return getChild()*amountDaily;
+	}
 }
 
