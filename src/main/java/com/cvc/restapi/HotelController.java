@@ -32,13 +32,14 @@ public class HotelController {
 	HotelService _hotelService;
 
 	
-	@GetMapping("/consultar")
-	@ApiOperation(value = "Retorna detalhes da cotação de reserva")
-	public ResponseEntity ValoresCotacao(@RequestParam(value="codHotel") int codHotel) {
+	@GetMapping("/Carregar")
+	@ApiOperation(value = "Carregar em memória a lista de hoteis por cidade")
+	public HttpStatus CarregarHotel(@RequestParam(value="codHotel") int codHotel) {
 		try {
-			return new ResponseEntity(codHotel, HttpStatus.OK);
+			
+			return HttpStatus.OK;
 		} catch (Exception e) {
-			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			return HttpStatus.BAD_REQUEST;
 		}
 	}		
 	
@@ -50,7 +51,7 @@ public class HotelController {
 												  @RequestParam(value="adults") int adults,
 												  @RequestParam(value="children") int children) {
 		try {
-			return new ResponseEntity(_hotelService.HotelsByCity(cityCode, checkin, checkout, adults, children), HttpStatus.OK);
+			return new ResponseEntity(_hotelService.HotelsByCity(cityCode, checkin, checkout), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}

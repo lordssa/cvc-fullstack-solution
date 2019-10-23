@@ -22,12 +22,16 @@ public class HotelService {
 		this.hotelFactoryService = hotelFactoryService;
 	}
 	
+	public void Load(int code){		
+		hotelFactoryService.Load(code);	
+	}
+	
 	public List<Cotacao> HotelDetail(int code){
 		int amountDaily = 0;
 		return hotelFactoryService.Search(ServiceType.HotelDetail, code, amountDaily);	
 	}
 	
-	public List<Cotacao> HotelsByCity(int code, Date checkin, Date checkout, int adults, int children){
+	public List<Cotacao> HotelsByCity(int code, Date checkin, Date checkout){
 		int amountDaily = Days.daysBetween(new LocalDate(checkin), new LocalDate(checkout)).getDays();		
 		return hotelFactoryService.Search(ServiceType.HotelsByCity, code, amountDaily);
 	}

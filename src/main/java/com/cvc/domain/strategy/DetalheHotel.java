@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.cvc.domain.model.Cotacao;
 import com.cvc.domain.model.Hotel;
+import com.cvc.repository.BaseHotelRepository;
 
-public class DetalheHotel extends AbstractHotel implements IHotelStrategy {
+public class DetalheHotel extends BaseHotelRepository implements IHotelStrategy {
 
 	@Override
 	public List<Cotacao> Search(int code, int amountDaily){		
-		List<Hotel> lista = Find(String.valueOf(code));
+		List<Hotel> lista = showHotelDetail(code);
 		return null;
 	}
 }
