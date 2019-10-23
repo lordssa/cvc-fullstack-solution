@@ -19,8 +19,7 @@ Broker coded with Java Spring Boot and frontend with Vue.js
 Checkout the code from Github repository inside Eclipse Workspace 
 ```
 $ git clone https://github.com/lordssa/cvc-fullstack-solution.git
-$ npm install -g @vue/cli
-$ npm install axios
+$ npm install 
 ```
 
 After acquire the project, open the Eclipse and select the option "import existing Maven projects" in "File > Import"
@@ -29,13 +28,6 @@ Once you have maven installed on your environment, install the project dependenc
 
 ```
 mvn install
-```
-
-### Testing
-
-Run all tests:
-```
-mvn test
 ```
 
 ## Running
@@ -65,14 +57,13 @@ After server up, access http://localhost:8080/swagger-ui.html. On the sale-contr
 Through Swagger.
 ```
 *Example*
-On the section sale-controller, select method GET "/api/hoteis/consulta" and click "try it out" button, fill the required parameters, click in execute button and that's it!
+On the section sale-controller, select method GET "/api/hoteis/detalhes" and click "try it out" button, fill the required parameters, click in execute button and that's it!
 ```
 ## Built With
 
 * [Spring Boot](https://spring.io/projects/spring-boot) - Spring Boot 2
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [JUnit](https://junit.org/) - Testing Framework
-* [Swagger](https://swagger.io/) - Documentation and User Interface for the REST Service
+* [Swagger 2](https://swagger.io/) - Documentation and User Interface for the REST Service
 * [Vue.js](https://vuejs.org/) - Progressive Javascript Framework for building UI on the web
 
 ## Authors
