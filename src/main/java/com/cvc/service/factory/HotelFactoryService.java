@@ -1,15 +1,14 @@
 package com.cvc.service.factory;
 
-import java.math.BigDecimal;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
-import com.cvc.enums.TipoServico;
-import com.cvc.model.Hotel;
-import com.cvc.service.strategy.DetalheHotel;
-import com.cvc.service.strategy.HoteisCidade;
-import com.cvc.service.strategy.IHotelStrategy;
+import com.cvc.domain.enums.ServiceType;
+import com.cvc.domain.model.Cotacao;
+import com.cvc.domain.strategy.DetalheHotel;
+import com.cvc.domain.strategy.HoteisCidade;
+import com.cvc.domain.strategy.IHotelStrategy;
+import com.cvc.repository.HotelRepository;
 
 
 /**
@@ -26,16 +25,18 @@ public class HotelFactoryService {
 	private IHotelStrategy hotelCidade;
 	private IHotelStrategy hotelDetalhe;
 	
-	public HotelFactoryService() {
-		hotelCidade = new HoteisCidade();
-		hotelDetalhe = new DetalheHotel();		
+	
+	public void Load(int cityCode) {
+		HotelRepository.getInstance().LoadListHotel(cityCode);
 	}
-
-	public List<Hotel> Search(TipoServico tipoServico, int code){
-		if(TipoServico.HoteisPorCidade == tipoServico) {
-			return hotelCidade.Search(code);
-		}else if(TipoServico.DetalheHotel == tipoServico) {
-			return hotelDetalhe.Search(code);
+	
+	public List<Cotacao> Search(ServiceType type, int code, int amountDaily){
+		if(ServiceType.HotelsByCity == type) {
+			hotelCidade = new HoteisCidade();
+			return hotelCidade.Search(code, amountDaily);
+		}else if(ServiceType.HotelDetail == type) {
+			hotelDetalhe = new DetalheHotel();	
+			return hotelDetalhe.Search(code, amountDaily);
 		}
 		
 		return null;
