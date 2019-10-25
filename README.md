@@ -43,6 +43,7 @@ The API will be available at http://localhost:8080/api/
 
 To run the client side, run the command below
 ```
+cd client
 npm run serve
 ```
 Open your browser and go to http://localhost:8081 and you should see the results

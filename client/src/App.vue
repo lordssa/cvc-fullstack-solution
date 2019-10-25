@@ -54,6 +54,13 @@
 </div>
 <br/><br/>
  <div class="container">
+    <center>
+      <p v-if="hoteis.length>0">
+        <button @click="prevPage" class="waves-effect btn-small blue darken-1">Anterior</button> 
+        Página {{currentPage}} de {{Math.ceil(hoteis.length/pageSize)}} Páginas
+        <button @click="nextPage" class="waves-effect btn-small blue darken-1">Próximo</button>
+      </p>
+     </center>
       <table>
 
         <thead>
@@ -83,11 +90,13 @@
         </tbody>
       
       </table>
-      <p>
-      <button @click="prevPage" class="waves-effect btn-small blue darken-1">Anterior</button> 
-      Página {{currentPage}} de {{Math.ceil(hoteis.length/pageSize)}} Páginas
-      <button @click="nextPage" class="waves-effect btn-small blue darken-1">Próximo</button>
+      <center>
+      <p v-if="hoteis.length>0">
+        <button @click="prevPage" class="waves-effect btn-small blue darken-1">Anterior</button> 
+        Página {{currentPage}} de {{Math.ceil(hoteis.length/pageSize)}} Páginas
+        <button @click="nextPage" class="waves-effect btn-small blue darken-1">Próximo</button>
       </p>
+     </center>
 
     </div>
 
@@ -162,6 +171,8 @@ export default{
     },
     pesquisar(){
       if(this.checkForm()){
+        var checkin = this.reservation.checkin;
+        var checkout = this.reservation.checkout;
         this.reservation.checkin = this.formatarData(this.reservation.checkin);
         this.reservation.checkout = this.formatarData(this.reservation.checkout);        
         HotelService.listarPorCidade(this.reservation).then(response => {        
@@ -171,6 +182,9 @@ export default{
         }).catch(e => {
             this.errors = e.response.data.errors
         });
+        this.reservation.checkin = checkin;
+        this.reservation.checkout = checkout; 
+
       }
     },
     citySelected (city) {

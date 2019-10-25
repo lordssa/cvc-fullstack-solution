@@ -10,7 +10,7 @@ public class DetalheHotel extends BaseHotelRepository implements IHotelStrategy 
 
 	@Override
 	public List<Cotacao> Search(int code, int amountDaily){		
-		List<Hotel> lista = showHotelDetail(code);
-		return null;
+		List<Hotel> lista = showHotelDetail(code);		
+		return getCotacoes(lista, amountDaily);
 	}
 }
