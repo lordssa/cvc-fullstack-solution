@@ -1,5 +1,6 @@
 package com.cvc.domain.model;
 
+
 public class Price {
 	private double adult;
 	private double child;
@@ -18,7 +19,7 @@ public class Price {
 	}
 	
 	public double getTotalPrice(int amountDaily) {
-		return getValueTripAdult(amountDaily)+getValueTripChild(amountDaily)+getComissao(amountDaily);
+		return Math.round((getValueTripAdult(amountDaily)+getValueTripChild(amountDaily)+getComissao(amountDaily))*100d)/100d;
 	}
 	
 	private double getComissao(int amountDaily) {

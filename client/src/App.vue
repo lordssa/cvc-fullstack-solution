@@ -67,11 +67,11 @@
 
         </thead>
         <tbody>
-          <template v-for="hotel of hoteis"  >
+          <template v-for="hotel of hotelPaged"  >
             <tr :key="hotel.id">
               <td colspan="4"><b>Hotel {{hotel.id}} - {{hotel.cityName}}</b></td>
             </tr>
-            <tr v-for="room of hotel.rooms" :key="room.roomID">
+            <tr v-for="room of hotel.rooms" :key="room.roomID+'-'+hotel.id">
 
               <td>{{room.categoryName}}</td>
               <td>{{room.priceDetail.pricePerDayAdult}}</td>
@@ -83,6 +83,11 @@
         </tbody>
       
       </table>
+      <p>
+      <button @click="prevPage" class="waves-effect btn-small blue darken-1">Anterior</button> 
+      Página {{currentPage}} de {{Math.ceil(hoteis.length/pageSize)}} Páginas
+      <button @click="nextPage" class="waves-effect btn-small blue darken-1">Próximo</button>
+      </p>
 
     </div>
 
@@ -110,13 +115,24 @@ export default{
       },
       cities:[{id:1032,name:'Porto Seguro'},{id:7110,name:'Rio de Janeiro'}, {id:9626,name:'São Paulo'}],
       hoteis: [],
-      errors: []
+      errors: [],
+      pageSize:10,
+      currentPage:1
     }
   },
   components: {
     Autocomplete,
     Datepicker
   },   
+  computed:{
+    hotelPaged:function() {
+      return this.hoteis.filter((row, index) => {
+        let start = (this.currentPage-1)*this.pageSize;
+        let end = this.currentPage*this.pageSize;
+        if(index >= start && index < end) return true;
+      });
+    }
+  },
   methods:{
     checkForm(){
       if (this.reservation.cityCode 
@@ -147,11 +163,10 @@ export default{
     pesquisar(){
       if(this.checkForm()){
         this.reservation.checkin = this.formatarData(this.reservation.checkin);
-        this.reservation.checkout = this.formatarData(this.reservation.checkout);
-        /* eslint-disable no-console */
-            console.log(this.reservation); 
+        this.reservation.checkout = this.formatarData(this.reservation.checkout);        
         HotelService.listarPorCidade(this.reservation).then(response => {        
             this.hoteis = response.data;
+            this.currentPage = 1;
             this.errors = [];
         }).catch(e => {
             this.errors = e.response.data.errors
@@ -161,6 +176,12 @@ export default{
     citySelected (city) {
       this.reservation.cityCode = city.value;
       HotelService.carregar(city.value).then({}); 
+    },
+    nextPage:function() {
+      if((this.currentPage*this.pageSize) < this.hoteis.length) this.currentPage++;
+    },
+    prevPage:function() {
+      if(this.currentPage > 1) this.currentPage--;
     },
     formatarData(data){
        var dataFormatada = ("0" + data.getDate()).substr(-2) + "/" 
