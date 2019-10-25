@@ -18,11 +18,10 @@ public class HotelRepository extends BaseHotelRepository {
 	}
 	
 	public static synchronized HotelRepository getInstance() {
-		if(_instance == null) {		
-			System.out.println("Instanciando...");
+		if(_instance == null) {					
 			_instance = new HotelRepository();
 		}
-		System.out.println("Já Instanciado.");
+		
 		return _instance;
 	}
 	
@@ -43,13 +42,11 @@ public class HotelRepository extends BaseHotelRepository {
 	 * @return Load hotel list filtered by city in memory
 	 */
 	public void LoadListHotel(int cityCode) {		
-		if(this.listHotel == null || this.cityCode != cityCode) {	
-			System.out.println("Carregando json...");
+		if(this.listHotel == null || this.cityCode != cityCode) {				
 			String queryString = "avail/"+cityCode;
 			this.listHotel = Find(queryString);	
 			this.cityCode = cityCode;
-		}	
-		System.out.println("Json já carregado.");
+		}			
 	}
 	
 	
