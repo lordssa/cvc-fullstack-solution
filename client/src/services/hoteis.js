@@ -2,7 +2,10 @@ import { http } from './config'
 
 export default {
 
-    listar:() => {
-        return http.get('hoteis/consultar?codHotel='+44344);
+    carregar:(cityCode) => {
+        return http.get('hoteis/carregar?cityCode='+cityCode);
+    },
+    listarPorCidade:(reservation) => {
+        return http.get('hoteis/porCidade?cityCode='+reservation.cityCode+'&checkin='+reservation.checkin+'&checkout='+reservation.checkout+'&adults='+reservation.adults+'&children='+reservation.children);
     }
 }

@@ -32,3 +32,6 @@ build/
 
 ## Vue Client ##
 client/node_modules
+
+### Java ###
+*.class

@@ -8,14 +8,15 @@ import com.cvc.domain.model.Cotacao;
 import com.cvc.domain.model.Hotel;
 import com.cvc.domain.model.PriceDetail;
 import com.cvc.domain.model.RoomCotacao;
+import com.cvc.repository.HotelRepository;
 
-public class HoteisCidade extends AbstractHotel implements IHotelStrategy{
+public class HoteisCidade implements IHotelStrategy{
 		 
 
 	@Override
 	public List<Cotacao> Search(int code, int amountDaily) {
-		String queryString = "avail/"+code;
-		List<Hotel> lista = Find(queryString);
+		 
+		List<Hotel> lista = HotelRepository.getInstance().ListAllByCity(code);
 		
 		List<Cotacao> cotacoes = lista.stream()
 	            .map(new Function<Hotel, Cotacao>(){
